@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:13
+    volumes:
+      - ./postgres:/docker-entrypoint-initdb.d/
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5435:5432
+    environment:
+      POSTGRES_USER: mcve
+      POSTGRES_PASSWORD: mcve
+      POSTGRES_DB: mcve
+
+volumes:
+  postgres_data:
