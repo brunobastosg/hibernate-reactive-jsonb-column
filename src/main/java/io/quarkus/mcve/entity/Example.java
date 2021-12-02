@@ -1,26 +1,19 @@
 package io.quarkus.mcve.entity;
 
-import java.util.Map;
+import io.quarkus.mcve.jpa.MapJsonConverter;
 
-import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-
-import io.quarkiverse.hibernate.types.json.JsonBinaryType;
-import io.quarkiverse.hibernate.types.json.JsonTypes;
+import java.util.Map;
 
 @Entity
-@TypeDef(name = JsonTypes.JSON_BIN, typeClass = JsonBinaryType.class)
 public class Example {
 
     @Id
     private int id;
 
-    @Type(type = JsonTypes.JSON_BIN)
-    @Column(columnDefinition = JsonTypes.JSON_BIN)
+    @Convert(converter = MapJsonConverter.class)
     private Map<String, Object> content;
 
     public int getId() {
